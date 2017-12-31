@@ -2,30 +2,21 @@
 //
 
 #include "stdafx.h"
-#include "IntArray.h"
+#include "FixPoint2.h"
 
-IntArray fillArray()
-{
-	IntArray a(5);
-	a[0] = 5;
-	a[1] = 8;
-	a[2] = 2;
-	a[3] = 3;
-	a[4] = 6;
-
-	return a;
-}
 
 int main()
 {
-	IntArray a = fillArray();
-	std::cout << a << '\n';
+	std::cout << std::boolalpha;
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.23) == FixedPoint2(1.98)) << '\n'; // both positive, no decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.50) == FixedPoint2(2.25)) << '\n'; // both positive, with decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.23) == FixedPoint2(-1.98)) << '\n'; // both negative, no decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.50) == FixedPoint2(-2.25)) << '\n'; // both negative, with decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.23) == FixedPoint2(-0.48)) << '\n'; // second negative, no decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.50) == FixedPoint2(-0.75)) << '\n'; // second negative, possible decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.23) == FixedPoint2(0.48)) << '\n'; // first negative, no decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.50) == FixedPoint2(0.75)) << '\n'; // first negative, possible decimal overflow
 
-	IntArray b(1);
-	a = a;
-	b = a;
-
-	std::cout << b << '\n';
 
 	return 0;
 }
