@@ -29,8 +29,8 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream &out, const FixedPoint2 &point);
-	friend std::istream& operator >> (std::istream&in, const FixedPoint2 &point);
-	operator double() const;
+	friend std::istream& operator >> (std::istream&in, FixedPoint2 &point);
+	explicit operator double() const;
 	bool operator==(const FixedPoint2 &p2);
 	friend FixedPoint2 operator+(FixedPoint2 &p1, FixedPoint2 &p2);
 	FixedPoint2& operator-();

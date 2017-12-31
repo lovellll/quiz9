@@ -25,42 +25,20 @@ bool FixedPoint2::operator==(const FixedPoint2 &p2)
 
 FixedPoint2 operator+(FixedPoint2 &p1, FixedPoint2 &p2)
 {
-	int m_base = p1.m_base + p2.m_base;
-	int m_decimal = p1.m_decimal + p2.m_decimal;
-	if ((p1.m_base > 0  || p1.m_decimal > 0) && (p2.m_base > 0 || p2.m_decimal  > 0))
-	{
-		if (m_decimal > 99)
-		{
-			m_decimal = m_decimal - 100;
-			++m_base;
-		}
-		return FixedPoint2(m_base, m_decimal);
-	}
-	else if ((p1.m_base < 0 || p1.m_decimal < 0) && (p2.m_base < 0 || p2.m_decimal  < 0))
-	{
-		if (m_decimal < -99)
-		{
-			m_decimal = m_decimal + 100;
-			--m_base;
-		}
-		return FixedPoint2(m_base, m_decimal);
-	}
-	else
-	{
-		int flag; //ÅÐ¶Ï×óÓÒË­´óË­Ð¡
-		if (fabs(p1) > fabs(p2))
-			flag = 0;
-		else
-			flag = 1;
-
-		return FixedPoint2(m_base, m_decimal);
-	}
-	
+	return FixedPoint2(static_cast<double>(p1) + static_cast<double>(p2));
 }
 
 FixedPoint2& FixedPoint2::operator-()
 {
-	-m_base;
-	-m_decimal;
+	m_base = -m_base;
+	m_decimal = -m_decimal;
 	return *this;
+}
+
+std::istream& operator >> (std::istream&in, FixedPoint2 &point)
+{
+	double temp;
+	in >> temp;
+	point = FixedPoint2(temp);
+	return in;
 }
