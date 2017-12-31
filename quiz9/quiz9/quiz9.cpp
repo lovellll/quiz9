@@ -2,30 +2,30 @@
 //
 
 #include "stdafx.h"
-#include "Average.h"
+#include "IntArray.h"
+
+IntArray fillArray()
+{
+	IntArray a(5);
+	a[0] = 5;
+	a[1] = 8;
+	a[2] = 2;
+	a[3] = 3;
+	a[4] = 6;
+
+	return a;
+}
 
 int main()
 {
-	Average avg;
+	IntArray a = fillArray();
+	std::cout << a << '\n';
 
-	avg += 4;
-	std::cout << avg << '\n'; // 4 / 1 = 4
+	IntArray b(1);
+	a = a;
+	b = a;
 
-	avg += 8;
-	std::cout << avg << '\n'; // (4 + 8) / 2 = 6
-
-	avg += 24;
-	std::cout << avg << '\n'; // (4 + 8 + 24) / 3 = 12
-
-	avg += -10;
-	std::cout << avg << '\n'; // (4 + 8 + 24 - 10) / 4 = 6.5
-
-	(avg += 6) += 10; // 2 calls chained together
-	std::cout << avg << '\n'; // (4 + 8 + 24 - 10 + 6 + 10) / 6 = 7
-
-	Average copy = avg;
-	std::cout << copy << '\n';
+	std::cout << b << '\n';
 
 	return 0;
 }
-
